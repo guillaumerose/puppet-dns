@@ -1,12 +1,15 @@
-define dns::record::ptr ($zone, $data, $ttl = '') {
-
+define dns::record::ptr(
+  $zone,
+  $data,
+  $ttl = ''
+) {
   $alias = "${name},PTR,${zone}"
 
   dns::record { $alias:
-    zone => $zone,
-    host => $name,
-    ttl => $ttl,
+    zone   => $zone,
+    host   => $name,
+    ttl    => $ttl,
     record => 'PTR',
-    data => "${data}."
+    data   => "${data}.",
   }
 }

@@ -1,12 +1,16 @@
-define dns::record::a ($zone, $data, $ttl = '', $ptr = false) {
-
+define dns::record::a(
+  $zone,
+  $data,
+  $ttl = '',
+  $ptr = false
+) {
   $alias = "${name},A,${zone}"
 
   dns::record { $alias:
     zone => $zone,
     host => $name,
-    ttl => $ttl,
-    data => $data
+    ttl  => $ttl,
+    data => $data,
   }
 
   if $ptr {
@@ -16,7 +20,7 @@ define dns::record::a ($zone, $data, $ttl = '', $ptr = false) {
 
     dns::record::ptr { $octet:
       zone => $reverse_zone,
-      data => "${name}.${zone}"
+      data => "${name}.${zone}",
     }
   }
 }
